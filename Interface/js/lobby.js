@@ -111,11 +111,20 @@ function submitGuess(){
 
 
 function receiveData(data_in){
-    
+    // array will be made of [x, y, isPen, colour, isClear, isUndo]
     // let data_out = [dist[0], dist[1], pen, penColour];
+    console.log(data_in);
     let dist = [data_in[0], data_in[1]];
     let pen = data_in[2];
     penColor = data_in[3];
+    if (data_in[4]){
+        console.log("clearing canvas");
+        eraseCanvas();
+    }
+    else if (data_in[5]){
+        console.log("undoing last stroke");
+        undoLastStroke();
+    }
 
     if(pen == true){
         draw(dist);
@@ -127,7 +136,7 @@ function receiveData(data_in){
 
 function laser(dist_data){
   
-    console.log(dist_data);
+    // console.log(dist_data);
 
     if(fullPath.length != 0)
     {

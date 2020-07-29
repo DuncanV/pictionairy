@@ -7,9 +7,16 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="../css/contoller.css">
+    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-colorpicker/3.2.0/css/bootstrap-colorpicker.css"> -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.js"></script>
+    <script type="text/javascript" src="../../farbtastic/farbtastic.js"></script>
+
+    <link rel="stylesheet" href="../../farbtastic/farbtastic.css" type="text/css" />
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-colorpicker/3.2.0/js/bootstrap-colorpicker.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.4.4/umd/popper.min.js"></script>
+    <link rel="canonical" href="https://mdbootstrap.com/plugins/jquery/color-picker/"> -->
     <script>
       let fullPath = [];
       function mouseDown() {
@@ -35,7 +42,7 @@
 
 <body onload="init()">
     
-  <div class="topnav" id="myTopnav">
+  <diov class="topnav" id="myTopnav">
     <a href="#home" class="active rainbow">PictionAIRy</a>
     <a style="float: right;" id=""onclick="logout()">Logout</a>
     <a style="float: right" href='./../index.html' id="leaveGame">Leave Game</a>
@@ -81,12 +88,16 @@
     <div id="create" class="collapse">
         <!-- BLANK -->
     </div>
-    <div class="card bg-color">
+    <!-- <div class="card bg-color">
       <div class="card-body text-center d-flex justify-content-center align-items-center flex-column">
         <button id="color-picker-3" class="btn btn-outline-primary btn-sm">Colour Picker</button>
       </div>
-    </div>
+    </div> -->
     <button type="button" class="btn btn-primary drawControlButton" onclick="flipCalibrate()">Calibrate</button>
+    <div id="create" class="collapse">
+        <!-- BLANK -->
+    </div>
+    <button type="button" class="btn btn-primary drawControlButton" onclick="undoDraw()">Undo</button>
     <div id="create" class="collapse">
         <!-- BLANK -->
     </div>
@@ -96,13 +107,50 @@
       <div id="disabled">Drawing Disabled!</div>
     </div>
 
-    <div id="chooseOverlay" >
-        <div style="position:absolute; color:white; left: 50%; top: 20%;"><h2 id="chooseTimer">10</h2></div>
-        <div class="col-sm-4" style="position:absolute; left: 42%; top: 40%;"> <button id='choice-1' type="button" class="btn btn-primary" onclick="choseOption(id)">Choice 1</button></div>
-        <div class="col-sm-4" style="position:absolute; left: 42%; top: 50%;"> <button id='choice-2' type="button" class="btn btn-primary" onclick="choseOption(id)">Choice 2</button></div>
-        <div class="col-sm-4" style="position:absolute; left: 42%; top: 60%;"> <button id='choice-3' type="button" class="btn btn-primary" onclick="choseOption(id)">Choice 3</button></div>
-    </div>
 
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
+  Change Brush Colour
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Pick a Colour</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body" style="padding-left:25%;">
+        <form><input type="hidden" id="color" name="color" value="#123456" /></form>
+          <div id="colorpicker"></div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Done</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+  
+  <div id="chooseOverlay" >
+    <div style="position:absolute; color:white; left: 50%; top: 20%;"><h2 id="chooseTimer">10</h2></div>
+    <div class="col-sm-4" style="position:absolute; left: 42%; top: 40%;"> <button id='choice-1' type="button" class="btn btn-primary" onclick="choseOption(id)">Choice 1</button></div>
+    <div class="col-sm-4" style="position:absolute; left: 42%; top: 50%;"> <button id='choice-2' type="button" class="btn btn-primary" onclick="choseOption(id)">Choice 2</button></div>
+    <div class="col-sm-4" style="position:absolute; left: 42%; top: 60%;"> <button id='choice-3' type="button" class="btn btn-primary" onclick="choseOption(id)">Choice 3</button></div>
+</div>
+
+    <script type="text/javascript">
+
+      $(document).ready(function() {
+    
+        $('#colorpicker').farbtastic('#color');
+      });
+    
+    </script>
    
 </body>
 

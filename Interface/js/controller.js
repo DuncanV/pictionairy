@@ -30,6 +30,8 @@ const sensor = new AbsoluteOrientationSensor({frequency: 60});
 sensor.addEventListener("reading", (e) => handleSensor(e));
 let calibrate = true;
 let pen = false;
+let isClear = false;
+let isUndo = false;
 let viewLaser = false;
 let initPos;
 let dist;
@@ -40,6 +42,11 @@ var socket;
 function init(){
     
     initServerConnection();
+     //('#colorpicker').farbtastic('#color'); ;
+     //console.log(  $('#colorpicker').farbtastic('#color'));
+     colourPen = document.getElementById("color").value ;
+     console.log(colourPen);
+   
 }
 
 function initServerConnection() {
@@ -205,9 +212,19 @@ function handleSensor(e){
   
   dist = angles.map((angle, i) => calcDist(angle, initPos[i]));
   console.log(dist)
-  // array will be made of [x, y, isPen, colour]
-  let penColour = "#cf060a"; 
-  let data_out = [dist[0], dist[1], pen, penColour];
+  // array will be made of [x, y, isPen, colour, isClear, isUndo]
+ // let penColour = "#cf060a"; 
+  let penColour = document.getElementById("color").value ;
+  console.log(penColour);
+  let data_out = [dist[0], dist[1], pen, penColour, false, false];
+  if (isClear){
+    data_out[4] = true;
+    isClear = false;
+  }
+  else if (isUndo){
+    data_out[5] = true;
+    isUndo = false;
+  }
   //send to_send
   socket.emit("drawdata", data_out);
 }
@@ -292,36 +309,42 @@ function sendOption(){
 
 
 function canvasClear(){
-
+  isClear = true;
 }
 
 function flipCalibrate(){
   calibrate = true;
 }
 
-const pickr3 = new Pickr({
-  el: '#color-picker-3',
-  useAsButton: true,
-  default: "303030",
-  components: {
-    preview: true,
-    opacity: true,
-    hue: true,
 
-    interaction: {
-      hex: true,
-      rgba: true,
-      hsla: true,
-      hsva: true,
-      cmyk: true,
-      input: true,
-      clear: true,
-      save: true
-    }
-  },
+function undoDraw(){
+  isUndo = true;
+}
 
-  onChange(hsva, instance) {
-    colourPen = hsva.toRGBA().toString();
-    // $('.bg-color').css('background-color', hsva.toRGBA().toString());
-  }
-});
+// const pickr3 = new Pickr({
+//   el: '#color-picker-3',
+//   useAsButton: true,
+//   default: "303030",
+//   components: {
+//     preview: true,
+//     opacity: true,
+//     hue: true,
+
+//     interaction: {
+//       hex: true,
+//       rgba: true,
+//       hsla: true,
+//       hsva: true,
+//       cmyk: true,
+//       input: true,
+//       clear: true,
+//       save: true
+//     }
+//   },
+
+//   onChange(hsva, instance) {
+//     colourPen = hsva.toRGBA().toString();
+//     console.log(hsva.toRGBA().toString());
+//     // $('.bg-color').css('background-color', hsva.toRGBA().toString());
+//   }
+// });
