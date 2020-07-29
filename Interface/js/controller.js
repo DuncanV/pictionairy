@@ -216,6 +216,7 @@ function handleSensor(e){
  // let penColour = "#cf060a"; 
   let penColour = document.getElementById("color").value ;
   console.log(penColour);
+  ///
   let data_out = [dist[0], dist[1], pen, penColour, false, false];
   if (isClear){
     data_out[4] = true;

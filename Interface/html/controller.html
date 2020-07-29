@@ -7,16 +7,13 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="../css/contoller.css">
-    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-colorpicker/3.2.0/css/bootstrap-colorpicker.css"> -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.js"></script>
     <script type="text/javascript" src="../../farbtastic/farbtastic.js"></script>
 
     <link rel="stylesheet" href="../../farbtastic/farbtastic.css" type="text/css" />
-    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-colorpicker/3.2.0/js/bootstrap-colorpicker.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.4.4/umd/popper.min.js"></script>
-    <link rel="canonical" href="https://mdbootstrap.com/plugins/jquery/color-picker/"> -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
     <script>
       let fullPath = [];
       function mouseDown() {
@@ -41,8 +38,8 @@
 </head>
 
 <body onload="init()">
-    
-  <diov class="topnav" id="myTopnav">
+  <!-- <div class="container"> -->
+  <div class="topnav" id="myTopnav">
     <a href="#home" class="active rainbow">PictionAIRy</a>
     <a style="float: right;" id=""onclick="logout()">Logout</a>
     <a style="float: right" href='./../index.html' id="leaveGame">Leave Game</a>
@@ -79,34 +76,59 @@
         </div>
     </div>
     <br>
-    <button type="button" class="btn btn-primary drawControlButton" ontouchstart="mouseDown()" ontouchend="mouseUp()" id='drawButton'>Draw</button>
-    <div id="create" class="collapse">
-        <!-- BLANK -->
-    </div>
+   
     <br />
-    <button type="button" class="btn btn-primary drawControlButton" onclick="startFullRound()">Clear</button>
-    <div id="create" class="collapse">
-        <!-- BLANK -->
-    </div>
+   
     <!-- <div class="card bg-color">
       <div class="card-body text-center d-flex justify-content-center align-items-center flex-column">
         <button id="color-picker-3" class="btn btn-outline-primary btn-sm">Colour Picker</button>
       </div>
     </div> -->
-    <button type="button" class="btn btn-primary drawControlButton" onclick="flipCalibrate()">Calibrate</button>
-    <div id="create" class="collapse">
-        <!-- BLANK -->
-    </div>
-    <button type="button" class="btn btn-primary drawControlButton" onclick="undoDraw()">Undo</button>
-    <div id="create" class="collapse">
-        <!-- BLANK -->
-    </div>
+    
+    
+    
+    
+    
 
     <!-- Overlay for chosing words and disabling -->
-    <div id="disableOverlay">
-      <div id="disabled">Drawing Disabled!</div>
-    </div>
+    
 
+<div class="row">
+  <div class="col-6 com-md-12">
+    <button type="button" class="btn btn-primary drawControlButton" ontouchstart="mouseDown()" ontouchend="mouseUp()" id='drawButton'>
+      <i class="fa fa-pencil-alt"></i>
+    </button>
+    <div id="create" class="collapse">
+        <!-- BLANK -->
+    </div>
+  </div>
+  <div class="col-6">
+    <button type="button" class="btn btn-primary drawControlButton" onclick="startFullRound()">
+      <i class="fa fa-trash"></i>
+    </button>
+    <div id="create" class="collapse">
+        <!-- BLANK -->
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-6 com-md-12">
+    <button type="button" class="btn btn-primary drawControlButton" onclick="undoDraw()">
+      <i class="fa fa-undo-alt"></i>
+    </button>
+    <div id="create" class="collapse">
+      <!-- BLANK -->
+  </div>
+  </div>
+  <div class="col-6">
+    <button type="button" class="btn btn-primary drawControlButton" onclick="flipCalibrate()">
+      <i class="fa fa-bullseye"></i>
+    </button>
+     <div id="create" class="collapse">
+        <!-- BLANK -->
+    </div>
+  </div>
+</div>
 
 <!-- Button trigger modal -->
 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
@@ -134,7 +156,9 @@
   </div>
 </div>
 
-
+<div id="disableOverlay">
+  <div id="disabled">Drawing Disabled!</div>
+</div>
   
   <div id="chooseOverlay" >
     <div style="position:absolute; color:white; left: 50%; top: 20%;"><h2 id="chooseTimer">10</h2></div>
@@ -151,7 +175,7 @@
       });
     
     </script>
-   
+   <!-- </div> -->
 </body>
 
 </html>

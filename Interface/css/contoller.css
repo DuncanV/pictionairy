@@ -1,3 +1,8 @@
+body{
+background-image : url("../images/painting.png");
+
+}
+
 .btn-xl {
   padding: 40px 40px;
   font-size: 40px;
