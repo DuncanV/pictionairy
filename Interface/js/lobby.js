@@ -117,9 +117,9 @@ function initServerConnection() {
         }
 
         if (data.roundNumber == 0) {
-            document.getElementById("lobbyRound").innerHTML = "<h3 class='shadowheading'>Not started</h3>";
+            document.getElementById("lobbyRound").innerHTML = "<h3 class='shadowheading2'>Not started</h3>";
         } else {
-            document.getElementById("lobbyRound").innerHTML = "<h3 class='shadowheading'>Round: " + data.roundNumber + "</h3>";
+            document.getElementById("lobbyRound").innerHTML = "<h3 class='shadowheading2'>Round: " + data.roundNumber + "</h3>";
         }
     });
 
