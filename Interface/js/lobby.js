@@ -139,9 +139,14 @@ function receiveData(data_in){
     let dist = [data_in[0], data_in[1]];
     pen = data_in[2];
     penColor = data_in[3];
-    // if (dist[0] = -9999){
-    //     console.log("-9999 received")
-    // }
+    if (data_in[4]){
+        console.log("clearing canvas");
+        eraseCanvas();
+    }
+    else if (data_in[5]){
+        console.log("undoing last stroke");
+        undoLastStroke();
+    }
 
     if(pen == true){
         draw(dist);

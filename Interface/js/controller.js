@@ -31,16 +31,32 @@ sensor.addEventListener("reading", (e) => handleSensor(e));
 let calibrate = true;
 let stopDraw = false;
 let pen = false;
+let isClear = false;
+let isUndo = false;
 let viewLaser = false;
 let initPos;
 let dist;
 let colourPen;
+
 
 var socket;
 
 function init(){
     
     initServerConnection();
+     //('#colorpicker').farbtastic('#color'); ;
+     //console.log(  $('#colorpicker').farbtastic('#color'));
+     colourPen = document.getElementById("color").value ;
+
+    
+    //  $('.btn-primary').css('btn-primary', "hover");
+    //  $('.btn-primary').css('btn-primary', "active");
+    //  $('.btn-primary').css('btn-primary', "visited");
+    //  $('.bg-color').css('background-color', colourPen.toRGBA().toString());
+    //  document.getElementById("color-button").style.backgroundColor = colourPen+ " !important";
+
+     console.log(colourPen);
+   
 }
 
 function initServerConnection() {
@@ -221,7 +237,15 @@ function handleSensor(e){
   // console.log(dist);
   // array will be made of [x, y, isPen, colour]
   let penColour = "#cf060a"; 
-  let data_out = [dist[0], dist[1], pen, penColour];
+  let data_out = [dist[0], dist[1], pen, penColour, false, false];
+  if (isClear){
+    data_out[4] = true;
+    isClear = false;
+  }
+  else if (isUndo){
+    data_out[5] = true;
+    isUndo = false;
+  }
   if (stopDraw){
     data_out[0] = -9999;
     data_out[1] = -9999;
@@ -288,36 +312,42 @@ function sendOption(){
 
 
 function canvasClear(){
-
+  isClear = true;
 }
 
 function flipCalibrate(){
   calibrate = true;
 }
 
-const pickr3 = new Pickr({
-  el: '#color-picker-3',
-  useAsButton: true,
-  default: "303030",
-  components: {
-    preview: true,
-    opacity: true,
-    hue: true,
 
-    interaction: {
-      hex: true,
-      rgba: true,
-      hsla: true,
-      hsva: true,
-      cmyk: true,
-      input: true,
-      clear: true,
-      save: true
-    }
-  },
+function undoDraw(){
+  isUndo = true;
+}
 
-  onChange(hsva, instance) {
-    colourPen = hsva.toRGBA().toString();
-    // $('.bg-color').css('background-color', hsva.toRGBA().toString());
-  }
-});
+// const pickr3 = new Pickr({
+//   el: '#color-picker-3',
+//   useAsButton: true,
+//   default: "303030",
+//   components: {
+//     preview: true,
+//     opacity: true,
+//     hue: true,
+
+//     interaction: {
+//       hex: true,
+//       rgba: true,
+//       hsla: true,
+//       hsva: true,
+//       cmyk: true,
+//       input: true,
+//       clear: true,
+//       save: true
+//     }
+//   },
+
+//   onChange(hsva, instance) {
+//     colourPen = hsva.toRGBA().toString();
+//     console.log(hsva.toRGBA().toString());
+//     // $('.bg-color').css('background-color', hsva.toRGBA().toString());
+//   }
+// });
