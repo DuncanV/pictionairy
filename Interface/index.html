@@ -27,26 +27,29 @@
     <div class="row">
         <div class="col-sm-8">
             <div class="row" style="align-items: center;">
-                <button id='createRoom'type="button" class="btn btn-primary" style="width: 80%; margin: 7% 7% 0% 7%;" disabled onclick="createRoom()">Create Room</button>
+                <button id='createRoom'type="button" class="btn btn-primary" style="width: 80%; margin: 7% 7% 0% 7%;opacity:1;" disabled onclick="createRoom()">Create Room</button>
             </div>
-            <div class="input-group" style="width: 80%; margin: 7% 7% 0% 7%;">
+            <div class="input-group" style="width: 80%; margin: 7% 7% 0% 7%;opacity:1;">
                 <input type="text" class="form-control" id="joinRoom" placeholder="Server ID" name="joinRoom" oninput="onJoinRoomText()">
                 <div class="input-group-btn">
                     <button type="button" class="btn btn-primary" id="joinRoomBtn" disabled onclick="joinRoom()">Join Room</button>
                 </div>
             </div>
-            <div class="input-group" style="width: 80%; margin: 7% 7% 0% 7%;">
+            <div class="input-group" style="width: 80%; margin: 7% 7% 0% 7%;opacity:1;">
                 <input type="text" class="form-control" id="connectDevice" placeholder="Server ID" name="connectDevice" oninput="onConnectDeviceText()">
                 <div class="input-group-btn">
                     <button type="button" class="btn btn-primary" id="connectDeviceBtn" disabled onclick="connectDevice()">Connect Device</button>
                 </div>
             </div>
         </div>
-        <div class="col-sm-4">
+        <div class="col-sm-4" style="background-color: #9ebae8; border-radius: 5px;">
             <div class="panel-group informationTabs" id="accordion" role="tablist" aria-multiselectable="true">
                 <div id="tabUpdate" role="tab">
                     <h3>
-                        <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseUpdate" aria-expanded="true" aria-controls="collapseUpdate" class>Instructions</a>
+                        <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseUpdate" aria-expanded="false" aria-controls="collapseUpdate" class="collapsed">
+                            <i class="fa fa-info-circle" aria-hidden="true"></i>
+                            &nbsp; Instructions
+                        </a>
                     </h3>
                 </div>
                 <div class="updateInfo collapse in" id="collapseUpdate" role="tabpanel" aria-labelledby="tabUpdate">
@@ -102,7 +105,10 @@
                 </div>
                 <div id="tabAbout" role="tab">
                     <h3>
-                        <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseAbout" aria-expanded="false" aria-controls="collapseAbout" class="collapsed">About the Creators</a>
+                        <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseAbout" aria-expanded="false" aria-controls="collapseAbout" class="collapsed">
+                            <i class="fa fa-users" aria-hidden="true"></i>
+                            &nbsp;About the Creators
+                        </a>
                     </h3>
                 </div>
                 <div class="updateInfo collapse collapse" id="collapseAbout" role="tabpanel" aria-labelledby="tabAbout" aria-expanded="false" style="height: 0px;">
