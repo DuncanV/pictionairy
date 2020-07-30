@@ -37,10 +37,8 @@ let viewLaser = false;
 let initPos;
 let dist;
 let colourPen;
-
-
+let chooseTimer = null;
 var socket;
-
 function init(){
     
     initServerConnection();
@@ -57,6 +55,8 @@ function init(){
 
      console.log(colourPen);
    
+
+    disable();
 }
 
 function initServerConnection() {
@@ -67,7 +67,6 @@ function initServerConnection() {
     var room_id = localStorage.getItem('roomId');
     jg(room_id);
 
-
     //Callback functions for socket communication
     socket.on("wordoptions", function(data) {
         console.log(data);
@@ -77,10 +76,11 @@ function initServerConnection() {
     socket.on("gamestate", function(data) {
         console.log(data);
 
-        if ((data.currentPlayer != null || data.currentPlayer != undefined) && data.currentPlayer.playerUID === localStorage.getItem("userId")) {
+        if (!data.isWordSet && (data.currentPlayer != null || data.currentPlayer != undefined) && data.currentPlayer.playerUID === localStorage.getItem("userId")) {
             console.log("IT IS MY TURN");
-
+            enable();
             socket.emit("getwordoptions");
+            //startFullRound(["myword1", "myword2", "myword3"]);
         }
     });
 }
@@ -106,12 +106,9 @@ function startTimer() {
     setCircleDasharray();
     setRemainingPathColor(timeLeft);
 
-    if (timeLeft <= 1) {
-      clearInterval(timerInterval);
-    }
-
     if (timeLeft <= 0) {
-        onTimesUp();
+      clearInterval(timerInterval);
+      onTimesUp();
     }
   }, 1000);
 }
@@ -189,16 +186,15 @@ function navBar() {
   }
 }
 
-function choseOption(id, timer){
-  clearInterval(timer);
+function choseOption(id){
+  clearInterval(chooseTimer);
   document.getElementById('chosenWord').innerHTML = document.getElementById(id).innerHTML;
-  if(id === 'choice-1'){
-  
-  }else if(id === 'choice-2'){
 
-  }else{
+  var chosenWord = document.getElementById('chosenWord').innerHTML;
+  alert("chosenword: " + chosenWord);
 
-  }
+  socket.emit("makechoice", {"choice":chosenWord});
+
   closeChoose();
   startDrawing();
 }
@@ -290,27 +286,24 @@ function startChosing(choice){
   document.getElementById('choice-2').innerHTML = choice[1];
   document.getElementById('choice-3').innerHTML = choice[2];
   var choosingTime = 10;
-  var chooseTimer = setInterval(function(){
+  chooseTimer = setInterval(function(){
     choosingTime--;
     document.getElementById('chooseTimer').innerHTML =choosingTime;
     if(choosingTime==0){
       var random = Math.floor(Math.random() * 3)+1;
       if(random == '1'){
-        choseOption("choice-1", chooseTimer);
+        choseOption("choice-1");
       }else if(random == '2'){
-        choseOption("choice-2", chooseTimer);
+        choseOption("choice-2");
       }else{
-        choseOption("choice-3", chooseTimer);
+        choseOption("choice-3");
       }
     }
     
   },1000);
 }
-function sendOption(){
-  //use this function to send data to server
-}
 
-
+//The clear button
 function canvasClear(){
   isClear = true;
 }
