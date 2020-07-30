@@ -37,6 +37,7 @@ let initPos;
 let dist;
 let colourPen;
 
+
 var socket;
 
 function init(){
@@ -45,6 +46,14 @@ function init(){
      //('#colorpicker').farbtastic('#color'); ;
      //console.log(  $('#colorpicker').farbtastic('#color'));
      colourPen = document.getElementById("color").value ;
+
+    
+    //  $('.btn-primary').css('btn-primary', "hover");
+    //  $('.btn-primary').css('btn-primary', "active");
+    //  $('.btn-primary').css('btn-primary', "visited");
+    //  $('.bg-color').css('background-color', colourPen.toRGBA().toString());
+    //  document.getElementById("color-button").style.backgroundColor = colourPen+ " !important";
+
      console.log(colourPen);
    
 }
