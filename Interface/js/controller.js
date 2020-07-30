@@ -56,9 +56,6 @@ function init(){
     console.log(colourPen);
     sensor.start();
     
-    choice[0] = "apple";
-    choice[1] = "pear";
-    choice[2] = "fig";
     // disable();
 }
 
