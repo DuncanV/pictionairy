@@ -54,7 +54,7 @@ function init(){
     //  document.getElementById("color-button").style.backgroundColor = colourPen+ " !important";
 
     console.log(colourPen);
-   
+    sensor.start();
     
     choice[0] = "apple";
     choice[1] = "pear";
